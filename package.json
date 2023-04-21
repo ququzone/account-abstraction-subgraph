@@ -1,0 +1,33 @@
+{
+  "name": "account-abstraction-subgraph",
+  "version": "0.1.0",
+  "private": true,
+  "repository": "git@github.com:ququzone/account-abstraction-subgraph.git",
+  "author": "ququzone <xueping.yang@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "subgraphs/**/*"
+  ],
+  "scripts": {
+    "codegen": "lerna run codegen",
+    "build:goerli": "lerna run build:goerli",
+    "build:mainnet": "lerna run build:mainnet",
+    "build:iotex_testnet": "lerna run build:iotex_testnet",
+    "build:iotex": "lerna run build:iotex",
+    "format:check": "prettier --check '*/**/*.{js,ts,yaml,yml,json}'",
+    "format:write": "prettier --write '*/**/*.{js,ts,yaml,yml,json}'",
+    "lint": "eslint '*/**/*.{js,ts}'",
+    "test": "lerna run test:lerna"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.47.0",
+    "@graphprotocol/graph-ts": "^0.29.3",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "lerna": "^6.6.1",
+    "prettier": "^2.7.1",
+    "typescript": "^5.0.4"
+  }
+}

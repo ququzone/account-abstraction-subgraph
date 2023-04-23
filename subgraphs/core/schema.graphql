@@ -8,3 +8,51 @@ type Blockchain @entity {
 
     totalTransactions: BigInt!
 }
+
+"""
+Paymaster
+"""
+type Paymaster @entity {
+    id: ID!
+}
+
+"""
+AccountFactory
+"""
+type AccountFactory @entity {
+    id: ID!
+    totalAccount: BigInt!
+    accounts: [Account!]! @derivedFrom(field: "factory")
+}
+
+"""
+Account
+"""
+type Account @entity {
+    id: ID!
+
+    factory: AccountFactory!
+    paymaster: Paymaster!
+    totalTransactions: BigInt!
+    ops: [UserOperation!]! @derivedFrom(field: "sender")
+
+    block: BigInt!
+    createdAt: BigInt!
+    updatedAt: BigInt!
+}
+
+"""
+UserOperation
+"""
+type UserOperation @entity {
+    id: ID!
+
+    bundler: Bytes!
+    txHash: Bytes!
+    sender: Account!
+    paymaster: Paymaster!
+    nonce: BigInt!
+    success: Boolean!
+    actualGasCost: BigInt!
+    actualGasUsed: BigInt!
+}

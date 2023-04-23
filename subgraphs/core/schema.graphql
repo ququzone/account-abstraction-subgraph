@@ -15,6 +15,22 @@ Paymaster
 type Paymaster @entity {
     id: ID!
     totalOperations: BigInt!
+    ops: [UserOperation!]! @derivedFrom(field: "paymaster")
+
+    createdAt: BigInt!
+    updatedAt: BigInt!
+}
+
+"""
+Bundler
+"""
+type Bundler @entity {
+    id: ID!
+    totalOperations: BigInt!
+    ops: [UserOperation!]! @derivedFrom(field: "bundler")
+
+    createdAt: BigInt!
+    updatedAt: BigInt!
 }
 
 """
@@ -48,7 +64,7 @@ UserOperation
 type UserOperation @entity {
     id: ID!
 
-    bundler: Bytes!
+    bundler: Bundler!
     sender: Account!
     paymaster: Paymaster!
     nonce: BigInt!

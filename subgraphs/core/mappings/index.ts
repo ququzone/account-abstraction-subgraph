@@ -1,5 +1,5 @@
 import { BigInt, log } from "@graphprotocol/graph-ts";
-import { Account, AccountFactory, Blockchain, Paymaster, UserOperation } from "../generated/schema";
+import { Account, AccountFactory, Blockchain, Bundler, Paymaster, UserOperation } from "../generated/schema";
 import { AccountDeployed, UserOperationEvent } from "../generated/Core/EntryPoint";
 
 export function handleAccountDeployed(event: AccountDeployed): void {
@@ -16,6 +16,7 @@ export function handleAccountDeployed(event: AccountDeployed): void {
   if (paymaster == null) {
     paymaster = new Paymaster(event.params.paymaster.toHex());
     paymaster.totalOperations = BigInt.zero();
+    paymaster.createdAt = event.block.timestamp;
     paymaster.save();
   }
   let factory = AccountFactory.load(event.params.factory.toHex());
@@ -55,9 +56,22 @@ export function handleUserOperation(event: UserOperationEvent): void {
   if (paymaster == null) {
     paymaster = new Paymaster(event.params.paymaster.toHex());
     paymaster.totalOperations = BigInt.zero();
+    paymaster.createdAt = event.block.timestamp;
   }
   paymaster.totalOperations = paymaster.totalOperations.plus(BigInt.fromI32(1));
+  paymaster.updatedAt = event.block.timestamp;
   paymaster.save();
+
+  let bundler = Bundler.load(event.transaction.from.toHex());
+  if (bundler == null) {
+    bundler = new Bundler(event.transaction.from.toHex());
+    bundler.totalOperations = BigInt.zero();
+    bundler.createdAt = event.block.timestamp;
+  }
+  bundler.totalOperations = bundler.totalOperations.plus(BigInt.fromI32(1));
+  bundler.updatedAt = event.block.timestamp;
+  bundler.save();
+
   const account = Account.load(event.params.sender.toHex());
   if (account == null) {
     log.error("Tried to save UserOperation to a non-existing account --- {} - {}", [
@@ -74,7 +88,7 @@ export function handleUserOperation(event: UserOperationEvent): void {
   if (userOp == null) {
     userOp = new UserOperation(event.params.userOpHash.toHex());
 
-    userOp.bundler = event.transaction.from;
+    userOp.bundler = bundler.id;
     userOp.paymaster = paymaster.id;
     userOp.sender = account.id;
     userOp.nonce = event.params.nonce;

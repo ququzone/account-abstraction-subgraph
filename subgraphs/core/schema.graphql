@@ -48,11 +48,14 @@ type UserOperation @entity {
     id: ID!
 
     bundler: Bytes!
-    txHash: Bytes!
     sender: Account!
     paymaster: Paymaster!
     nonce: BigInt!
     success: Boolean!
     actualGasCost: BigInt!
     actualGasUsed: BigInt!
+
+    txHash: Bytes!
+    block: BigInt!
+    createdAt: BigInt!
 }

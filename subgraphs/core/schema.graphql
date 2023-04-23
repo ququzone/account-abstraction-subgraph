@@ -1,0 +1,10 @@
+"""
+Blockchain
+"""
+type Blockchain @entity {
+    id: ID!
+
+    totalAccount: BigInt!
+
+    totalTransactions: BigInt!
+}

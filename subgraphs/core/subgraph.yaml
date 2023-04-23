@@ -1,0 +1,25 @@
+specVersion: 0.0.4
+description: Ethereum ERC4337 indexer
+repository: https://github.com/ququzone/account-abstraction-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Core
+    network: mainnet
+    source:
+      abi: EntryPoint
+      startBlock: 16693600
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./mappings/index.ts
+      entities:
+        - Blockchain
+      abis:
+        - name: EntryPoint
+          file: ./abis/EntryPoint.json
+      eventHandlers:
+        - event: AccountDeployed(indexed bytes32,indexed address,address,address)
+          handler: handleAccountDeployed

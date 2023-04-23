@@ -4,5 +4,11 @@
       "address": "0x0576a174D229E3cFA37253523E645A78A0C91B57",
       "startBlock": 16693600
     }
+  },
+  "iotex_testnet": {
+    "Core": {
+      "address": "0x893047826bC7185a06b123404aCfa22870Ba637D",
+      "startBlock": 19630116
+    }
   }
 }

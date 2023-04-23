@@ -8,6 +8,9 @@
   "scripts": {
     "codegen": "graph codegen subgraph.yaml",
     "build:mainnet": "graph build subgraph.yaml",
-    "deploy:mainnet": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ erc4337/core subgraph-mainnet.yaml"
+    "deploy:mainnet": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ erc4337/core subgraph-mainnet.yaml",
+    "create:iotex_testnet": "graph create erc4337/core_test --node https://rpc.graph.mainnet.iotex.io/",
+    "build:iotex_testnet": "graph build subgraph.yaml --network iotex_testnet",
+    "deploy:iotex_testnet": "graph deploy --product hosted-service --node https://rpc.graph.mainnet.iotex.io/ --ipfs https://ipfs.mainnet.iotex.io erc4337/core_test subgraph.yaml --network iotex_testnet"
   }
 }

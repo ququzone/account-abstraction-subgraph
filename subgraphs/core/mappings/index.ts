@@ -82,6 +82,7 @@ export function handleUserOperation(event: UserOperationEvent): void {
     userOp.actualGasCost = event.params.actualGasCost;
     userOp.actualGasUsed = event.params.actualGasUsed;
 
+    userOp.block = event.block.number;
     userOp.txHash = event.transaction.hash;
     userOp.createdAt = event.block.timestamp;
     userOp.save();

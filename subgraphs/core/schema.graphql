@@ -6,7 +6,7 @@ type Blockchain @entity {
 
     totalAccount: BigInt!
 
-    totalTransactions: BigInt!
+    totalOperations: BigInt!
 }
 
 """
@@ -14,6 +14,7 @@ Paymaster
 """
 type Paymaster @entity {
     id: ID!
+    totalOperations: BigInt!
 }
 
 """
@@ -33,7 +34,7 @@ type Account @entity {
 
     factory: AccountFactory!
     paymaster: Paymaster!
-    totalTransactions: BigInt!
+    totalOperations: BigInt!
     ops: [UserOperation!]! @derivedFrom(field: "sender")
 
     block: BigInt!

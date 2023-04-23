@@ -7,8 +7,7 @@ export function handleAccountDeployed(event: AccountDeployed): void {
   if (blockchain == null) {
     blockchain = new Blockchain("ETH");
     blockchain.totalAccount = BigInt.zero();
-    blockchain.totalTransactions = BigInt.zero();
-    blockchain.save();
+    blockchain.totalOperations = BigInt.zero();
   }
   blockchain.totalAccount = blockchain.totalAccount.plus(BigInt.fromI32(1));
   blockchain.save();
@@ -16,13 +15,13 @@ export function handleAccountDeployed(event: AccountDeployed): void {
   let paymaster = Paymaster.load(event.params.paymaster.toHex());
   if (paymaster == null) {
     paymaster = new Paymaster(event.params.paymaster.toHex());
+    paymaster.totalOperations = BigInt.zero();
     paymaster.save();
   }
   let factory = AccountFactory.load(event.params.factory.toHex());
   if (factory == null) {
     factory = new AccountFactory(event.params.factory.toHex());
     factory.totalAccount = BigInt.zero();
-    paymaster.save();
   }
   factory.totalAccount = factory.totalAccount.plus(BigInt.fromI32(1));
   factory.save();
@@ -33,7 +32,7 @@ export function handleAccountDeployed(event: AccountDeployed): void {
 
     account.factory = factory.id;
     account.paymaster = paymaster.id;
-    account.totalTransactions = BigInt.zero();
+    account.totalOperations = BigInt.zero();
 
     account.block = event.block.number;
     account.createdAt = event.block.timestamp;
@@ -47,17 +46,18 @@ export function handleUserOperation(event: UserOperationEvent): void {
   if (blockchain == null) {
     blockchain = new Blockchain("ETH");
     blockchain.totalAccount = BigInt.zero();
-    blockchain.totalTransactions = BigInt.zero();
-    blockchain.save();
+    blockchain.totalOperations = BigInt.zero();
   }
-  blockchain.totalTransactions = blockchain.totalTransactions.plus(BigInt.fromI32(1));
+  blockchain.totalOperations = blockchain.totalOperations.plus(BigInt.fromI32(1));
   blockchain.save();
 
   let paymaster = Paymaster.load(event.params.paymaster.toHex());
   if (paymaster == null) {
     paymaster = new Paymaster(event.params.paymaster.toHex());
-    paymaster.save();
+    paymaster.totalOperations = BigInt.zero();
   }
+  paymaster.totalOperations = paymaster.totalOperations.plus(BigInt.fromI32(1));
+  paymaster.save();
   const account = Account.load(event.params.sender.toHex());
   if (account == null) {
     log.error("Tried to save UserOperation to a non-existing account --- {} - {}", [
@@ -66,7 +66,7 @@ export function handleUserOperation(event: UserOperationEvent): void {
     ]);
     return;
   }
-  account.totalTransactions = account.totalTransactions.plus(BigInt.fromI32(1));
+  account.totalOperations = account.totalOperations.plus(BigInt.fromI32(1));
   account.updatedAt = event.block.timestamp;
   account.save();
 

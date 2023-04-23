@@ -17,6 +17,7 @@ export function handleAccountDeployed(event: AccountDeployed): void {
     paymaster = new Paymaster(event.params.paymaster.toHex());
     paymaster.totalOperations = BigInt.zero();
     paymaster.createdAt = event.block.timestamp;
+    paymaster.updatedAt = event.block.timestamp;
     paymaster.save();
   }
   let factory = AccountFactory.load(event.params.factory.toHex());

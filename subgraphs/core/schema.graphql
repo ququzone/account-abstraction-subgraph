@@ -48,7 +48,7 @@ Account
 type Account @entity {
     id: ID!
 
-    factory: AccountFactory!
+    factory: AccountFactory
     paymaster: Paymaster!
     totalOperations: BigInt!
     ops: [UserOperation!]! @derivedFrom(field: "sender")

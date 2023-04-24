@@ -38,9 +38,10 @@ export function handleAccountDeployed(event: AccountDeployed): void {
 
     account.block = event.block.number;
     account.createdAt = event.block.timestamp;
-    account.updatedAt = event.block.timestamp;
-    account.save();
   }
+  account.factory = factory.id;
+  account.updatedAt = event.block.timestamp;
+  account.save();
 }
 
 export function handleUserOperation(event: UserOperationEvent): void {
@@ -73,13 +74,20 @@ export function handleUserOperation(event: UserOperationEvent): void {
   bundler.updatedAt = event.block.timestamp;
   bundler.save();
 
-  const account = Account.load(event.params.sender.toHex());
+  let account = Account.load(event.params.sender.toHex());
   if (account == null) {
-    log.error("Tried to save UserOperation to a non-existing account --- {} - {}", [
+    log.info("Tried to save UserOperation to a non-existing account --- {} - {} - {}", [
+      event.transaction.hash.toHex(),
+      event.params.userOpHash.toHex(),
       event.params.sender.toHex(),
-      event.params.userOpHash.toString(),
     ]);
-    return;
+    account = new Account(event.params.sender.toHex());
+
+    account.paymaster = paymaster.id;
+    account.totalOperations = BigInt.zero();
+
+    account.block = event.block.number;
+    account.createdAt = event.block.timestamp;
   }
   account.totalOperations = account.totalOperations.plus(BigInt.fromI32(1));
   account.updatedAt = event.block.timestamp;
@@ -102,9 +110,10 @@ export function handleUserOperation(event: UserOperationEvent): void {
     userOp.createdAt = event.block.timestamp;
     userOp.save();
   } else {
-    log.error("Tried to save UserOperation with existing hash --- {} - {}", [
+    log.error("Tried to save UserOperation with existing hash --- {} - {} - {}", [
+      event.transaction.hash.toHex(),
+      event.params.userOpHash.toHex(),
       event.params.sender.toHex(),
-      event.params.userOpHash.toString(),
     ]);
   }
 }

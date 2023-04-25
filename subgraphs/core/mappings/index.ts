@@ -1,6 +1,18 @@
 import { BigInt, log } from "@graphprotocol/graph-ts";
-import { Account, AccountFactory, Blockchain, Bundler, Paymaster, UserOperation } from "../generated/schema";
-import { AccountDeployed, UserOperationEvent } from "../generated/Core/EntryPoint";
+import {
+  Account,
+  AccountFactory,
+  Blockchain,
+  Bundler,
+  Paymaster,
+  UserOperation,
+  UserOperationRevertReason,
+} from "../generated/schema";
+import {
+  AccountDeployed,
+  UserOperationEvent,
+  UserOperationRevertReason as UserOperationRevertReasonEvent,
+} from "../generated/Core/EntryPoint";
 
 export function handleAccountDeployed(event: AccountDeployed): void {
   let blockchain = Blockchain.load("ETH");
@@ -119,5 +131,22 @@ export function handleUserOperation(event: UserOperationEvent): void {
       event.params.userOpHash.toHex(),
       event.params.sender.toHex(),
     ]);
+  }
+}
+
+export function handleOpRevert(event: UserOperationRevertReasonEvent): void {
+  let revert = UserOperationRevertReason.load(event.params.userOpHash.toHex());
+  if (revert == null) {
+    revert = new UserOperationRevertReason(event.params.userOpHash.toHex());
+
+    revert.sender = event.params.sender;
+    revert.nonce = event.params.nonce;
+    revert.reason = event.params.revertReason;
+
+    revert.block = event.block.number;
+    revert.txHash = event.transaction.hash;
+    revert.createdAt = event.block.timestamp;
+
+    revert.save();
   }
 }

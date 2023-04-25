@@ -77,3 +77,18 @@ type UserOperation @entity {
     block: BigInt!
     createdAt: BigInt!
 }
+
+"""
+UserOperationRevertReason
+"""
+type UserOperationRevertReason @entity {
+    id: ID!
+
+    sender: Bytes!
+    nonce: BigInt!
+    reason: Bytes!
+
+    txHash: Bytes!
+    block: BigInt!
+    createdAt: BigInt!
+}

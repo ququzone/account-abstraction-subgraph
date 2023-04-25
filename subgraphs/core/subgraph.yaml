@@ -26,3 +26,5 @@ dataSources:
           handler: handleAccountDeployed
         - event: UserOperationEvent(indexed bytes32,indexed address,indexed address,uint256,bool,uint256,uint256)
           handler: handleUserOperation
+        - event: UserOperationRevertReason(indexed bytes32,indexed address,uint256,bytes)
+          handler: handleOpRevert

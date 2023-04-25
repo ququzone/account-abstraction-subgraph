@@ -5,7 +5,6 @@ type Blockchain @entity {
     id: ID!
 
     totalAccount: BigInt!
-
     totalOperations: BigInt!
 }
 
@@ -54,6 +53,8 @@ type Account @entity {
     ops: [UserOperation!]! @derivedFrom(field: "sender")
 
     block: BigInt!
+    createdOpHash: Bytes!
+    createdHash: Bytes!
     createdAt: BigInt!
     updatedAt: BigInt!
 }

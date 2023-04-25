@@ -38,6 +38,8 @@ export function handleAccountDeployed(event: AccountDeployed): void {
 
     account.block = event.block.number;
     account.createdAt = event.block.timestamp;
+    account.createdHash = event.transaction.hash;
+    account.createdOpHash = event.params.userOpHash;
   }
   account.factory = factory.id;
   account.updatedAt = event.block.timestamp;
@@ -88,6 +90,8 @@ export function handleUserOperation(event: UserOperationEvent): void {
 
     account.block = event.block.number;
     account.createdAt = event.block.timestamp;
+    account.createdHash = event.transaction.hash;
+    account.createdOpHash = event.params.userOpHash;
   }
   account.totalOperations = account.totalOperations.plus(BigInt.fromI32(1));
   account.updatedAt = event.block.timestamp;

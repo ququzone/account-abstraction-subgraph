@@ -7,8 +7,8 @@
   },
   "iotex_testnet": {
     "Core": {
-      "address": "0x893047826bC7185a06b123404aCfa22870Ba637D",
-      "startBlock": 19630116
+      "address": "0x16653fF93F0e5fEF85CE46862562a4c58B05435E",
+      "startBlock": 19932820
     }
   }
 }

@@ -1,5 +1,5 @@
-Account abstraction subgraph
-============================
+Account Abstraction Subgraph (ERC4337)
+======================================
 
 ## Deployments
 

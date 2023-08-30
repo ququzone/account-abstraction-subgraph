@@ -1,13 +1,13 @@
 {
   "mainnet": {
     "Core": {
-      "address": "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789",
+      "address": "0xc3527348De07d591c9d567ce1998eFA2031B8675",
       "startBlock": 16693600
     }
   },
   "iotex_testnet": {
     "Core": {
-      "address": "0x16653fF93F0e5fEF85CE46862562a4c58B05435E",
+      "address": "0xc3527348De07d591c9d567ce1998eFA2031B8675",
       "startBlock": 19932820
     }
   }

@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Core
-    network: mainnet
+    network: iotex_testnet
     source:
       abi: EntryPoint
-      address: "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
-      startBlock: 16693600
+      address: "0xc3527348De07d591c9d567ce1998eFA2031B8675"
+      startBlock: 19932820
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -24,7 +24,8 @@ dataSources:
       eventHandlers:
         - event: AccountDeployed(indexed bytes32,indexed address,address,address)
           handler: handleAccountDeployed
-        - event: UserOperationEvent(indexed bytes32,indexed address,indexed address,uint256,bool,uint256,uint256)
+        - event: UserOperationEvent(indexed bytes32,indexed address,indexed
+            address,uint256,bool,uint256,uint256)
           handler: handleUserOperation
         - event: UserOperationRevertReason(indexed bytes32,indexed address,uint256,bytes)
           handler: handleOpRevert

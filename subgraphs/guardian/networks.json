@@ -1,0 +1,8 @@
+{
+  "iotex_testnet": {
+    "Guardian": {
+      "address": "0xd8F31BC1E49d800D8B6B2AAE27219f47b94F5890",
+      "startBlock": 21887552
+    }
+  }
+}

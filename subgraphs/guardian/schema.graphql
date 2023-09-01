@@ -1,0 +1,12 @@
+"""
+Blockchain
+"""
+type EmailAccount @entity {
+    id: ID!
+
+    account: Bytes!
+    email: Bytes!
+    enable: Boolean!
+    updatedAt: BigInt!
+    createdAt: BigInt!
+}

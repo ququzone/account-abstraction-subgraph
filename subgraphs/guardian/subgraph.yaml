@@ -1,0 +1,28 @@
+specVersion: 0.0.4
+description: Ethereum ERC4337 indexer
+repository: https://github.com/ququzone/account-abstraction-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Guardian
+    network: iotex_testnet
+    source:
+      abi: EmailGuardian
+      address: "0xd8F31BC1E49d800D8B6B2AAE27219f47b94F5890"
+      startBlock: 21887552
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./mappings/index.ts
+      entities:
+        - EmailAccount
+      abis:
+        - name: EmailGuardian
+          file: ./abis/EmailGuardian.json
+      eventHandlers:
+        - event: EmailBinded(indexed address,bytes32)
+          handler: handleEmailBinded
+        - event: EmailUnbinded(indexed address,bytes32)
+          handler: handleEmailUnbinded

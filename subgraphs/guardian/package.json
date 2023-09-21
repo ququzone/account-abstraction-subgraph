@@ -12,4 +12,3 @@
     "deploy:iotex_testnet": "graph deploy --product hosted-service --node https://rpc.graph.mainnet.iotex.io/ --ipfs https://ipfs.mainnet.iotex.io guardian/testnet subgraph.yaml --network iotex_testnet"
   }
 }
-  

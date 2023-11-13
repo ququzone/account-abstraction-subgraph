@@ -11,6 +11,9 @@
     "deploy:mainnet": "graph deploy --product hosted-service ququzone/erc4337",
     "create:iotex_testnet": "graph create erc4337/core_test --node https://rpc.graph.mainnet.iotex.io/",
     "build:iotex_testnet": "graph build subgraph.yaml --network iotex_testnet",
-    "deploy:iotex_testnet": "graph deploy --product hosted-service --node https://rpc.graph.mainnet.iotex.io/ --ipfs https://ipfs.mainnet.iotex.io erc4337/core_test subgraph.yaml --network iotex_testnet"
+    "deploy:iotex_testnet": "graph deploy --product hosted-service --node https://rpc.graph.mainnet.iotex.io/ --ipfs https://ipfs.mainnet.iotex.io erc4337/core_test subgraph.yaml --network iotex_testnet",
+    "create:iotex": "graph create erc4337/core --node https://rpc.graph.mainnet.iotex.io/",
+    "build:iotex": "graph build subgraph.yaml --network iotex",
+    "deploy:iotex": "graph deploy --product hosted-service --node https://rpc.graph.mainnet.iotex.io/ --ipfs https://ipfs.mainnet.iotex.io erc4337/core subgraph.yaml --network iotex"
   }
 }

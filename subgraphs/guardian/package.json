@@ -9,6 +9,9 @@
     "codegen": "graph codegen subgraph.yaml",
     "create:iotex_testnet": "graph create guardian/testnet --node https://rpc.graph.mainnet.iotex.io/",
     "build:iotex_testnet": "graph build subgraph.yaml --network iotex_testnet",
-    "deploy:iotex_testnet": "graph deploy --product hosted-service --node https://rpc.graph.mainnet.iotex.io/ --ipfs https://ipfs.mainnet.iotex.io guardian/testnet subgraph.yaml --network iotex_testnet"
+    "deploy:iotex_testnet": "graph deploy --product hosted-service --node https://rpc.graph.mainnet.iotex.io/ --ipfs https://ipfs.mainnet.iotex.io guardian/testnet subgraph.yaml --network iotex_testnet",
+    "create:iotex": "graph create guardian/mainnet --node https://rpc.graph.mainnet.iotex.io/",
+    "build:iotex": "graph build subgraph.yaml --network iotex",
+    "deploy:iotex": "graph deploy --product hosted-service --node https://rpc.graph.mainnet.iotex.io/ --ipfs https://ipfs.mainnet.iotex.io guardian/mainnet subgraph.yaml --network iotex"
   }
 }

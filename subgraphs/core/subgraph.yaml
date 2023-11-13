@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Core
-    network: iotex_testnet
+    network: iotex
     source:
       abi: EntryPoint
       address: "0xc3527348De07d591c9d567ce1998eFA2031B8675"
-      startBlock: 19932820
+      startBlock: 25049713
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

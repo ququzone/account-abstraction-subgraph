@@ -10,5 +10,11 @@
       "address": "0xc3527348De07d591c9d567ce1998eFA2031B8675",
       "startBlock": 19932820
     }
+  },
+  "iotex": {
+    "Core": {
+      "address": "0xc3527348De07d591c9d567ce1998eFA2031B8675",
+      "startBlock": 25049713
+    }
   }
 }

@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Guardian
-    network: iotex_testnet
+    network: iotex
     source:
       abi: EmailGuardian
-      address: "0xBf081D23317966eEBD59Bc8EDB593A830F373178"
-      startBlock: 21887552
+      address: "0x275e5bbb5629a3e7Cc828cc81131E51E537ed84C"
+      startBlock: 26796867
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
